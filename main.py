@@ -1,6 +1,6 @@
 ######################################################
-### Projekt: Pilot ZiRa                            ###
-### Version: Master                                ###
+### Projekt: Pilot-ZiRa-Master                     ###
+### Version: 1.01                                  ###
 ### Datum  : 08.10.2025                            ###
 ######################################################
 #from machine import Pin, Timer       # type: ignore
