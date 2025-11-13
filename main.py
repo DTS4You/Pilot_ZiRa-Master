@@ -1,6 +1,6 @@
 ######################################################
 ### Projekt: Pilot ZiRa                            ###
-### Version: Slave                                 ###
+### Version: Master                                ###
 ### Datum  : 08.10.2025                            ###
 ######################################################
 #from machine import Pin, Timer       # type: ignore
