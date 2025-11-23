@@ -11,11 +11,8 @@ class XIO:
 
     def __init__(self, dir):
         self.dir = dir
-        self.io = []
-        self.io.append(False)
-        self.io.append(False)
-        self.io.append(False)
-        self.io.append(False)
+        self.value = 0x00
+        self.io = [False, False, False, False]
         self.pin = []
         if dir:
             self.set_xio_out()
@@ -35,7 +32,8 @@ class XIO:
         self.pin.append(Pin(13, mode=Pin.IN, pull=Pin.PULL_UP))
 
     def read_input(self):
-        pass
+        for i in range(4):
+            self.io[i] = self.pin[i].value()
 
     def write_output(self):
         for i in range(4):
@@ -48,6 +46,21 @@ class XIO:
     def get_bit(self, bit):
         return self.io[bit]
     
+    def set_byte(self, value):
+        self.value = value
+        for i in range(4):
+            if (self.value & 1 << i ):
+                self.io[i] = True
+            else:
+                self.io[i] = False
+
+    def read_byte(self):
+        self.value = 0x00
+        for i in range(4):
+            if self.io[i] == True:
+                self.value = self.value | 1 << i
+        return self.value
+    
 # -----------------------------------------------------------------------------
 def main():
 
@@ -56,6 +69,7 @@ def main():
     try:
         print("Start")
 
+        print("Create Object")
         xio = XIO(1)
 
         xio.write_output()
@@ -68,6 +82,22 @@ def main():
         xio.set_bit(3, False)
 
         xio.write_output()
+
+        sleep(1)
+
+        xio.set_byte(0xAA)
+        xio.write_output()
+        print(hex(xio.read_byte()))
+
+        sleep(1)
+
+        xio.set_byte(0x55)
+        xio.write_output()
+        print(hex(xio.read_byte()))
+
+        print("Delete Object")
+        del xio
+      
 
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
