@@ -1,6 +1,6 @@
 # #############################################################################
 # ### Modul XIO
-# ### V0.99
+# ### V1.00
 # #############################################################################
 
 from machine import Pin, PWM        # type: ignore
@@ -14,7 +14,7 @@ class XIO:
         self.value = 0x00
         self.io = [False, False, False, False]
         self.pin = []
-        if dir:
+        if dir == "OUTPUT":
             self.set_xio_out()
         else:
             self.set_xio_in()
@@ -39,6 +39,14 @@ class XIO:
         for i in range(4):
             self.pin[i].value(self.io[i])
     
+    def read_io(self):
+        self.read_input()
+        return self.get_byte()
+    
+    def write_io(self, value):
+        self.set_byte(value)
+        self.write_output()
+
     def set_bit(self, bit, value=True):
         self.io[bit] = value
         return self.io[bit]
@@ -54,7 +62,7 @@ class XIO:
             else:
                 self.io[i] = False
 
-    def read_byte(self):
+    def get_byte(self):
         self.value = 0x00
         for i in range(4):
             if self.io[i] == True:
@@ -69,34 +77,64 @@ def main():
     try:
         print("Start")
 
-        print("Create Object")
-        xio = XIO(1)
+        debug = "INPUT"
 
-        xio.write_output()
+        if debug == "OUTPUT":
+            print("Write Output")
+            xio = XIO("OUTPUT")
 
-        sleep(1)
+            xio.write_output()
+
+            sleep(1)
         
-        xio.set_bit(0, True)
-        xio.set_bit(1, False)
-        xio.set_bit(2, True)
-        xio.set_bit(3, False)
+            xio.set_bit(0, True)
+            xio.set_bit(1, False)
+            xio.set_bit(2, True)
+            xio.set_bit(3, False)
 
-        xio.write_output()
+            xio.write_output()
 
-        sleep(1)
+            sleep(1)
 
-        xio.set_byte(0xAA)
-        xio.write_output()
-        print(hex(xio.read_byte()))
+            xio.set_byte(0xAA)
+            xio.write_output()
+            print(hex(xio.get_byte()))
 
-        sleep(1)
+            sleep(1)
 
-        xio.set_byte(0x55)
-        xio.write_output()
-        print(hex(xio.read_byte()))
+            xio.set_byte(0x55)
+            xio.write_output()
+            print(hex(xio.get_byte()))
 
-        print("Delete Object")
-        del xio
+            sleep(1)
+            xio.write_io(0xAA)
+            print(hex(xio.get_byte()))
+
+            sleep(1)
+            xio.write_io(0x55)
+            print(hex(xio.get_byte()))
+
+            sleep(1)
+            print("Delete Object")
+            del xio
+        
+        else:
+            print("Read Input")
+            xio = XIO("INPUT")
+            xio.read_input()
+            print(hex(xio.get_byte()))
+
+            print("Bit 0 = " + str(xio.get_bit(0)) + " | Bit 1 = " + str(xio.get_bit(1)) + " | Bit 2 = " + str(xio.get_bit(2)) + " | Bit 3 = " + str(xio.get_bit(3)))
+
+            sleep(1)
+
+            for i in range(10):
+                xio.read_io()
+                print("Bit 0 = " + str(xio.get_bit(0)) + " | Bit 1 = " + str(xio.get_bit(1)) + " | Bit 2 = " + str(xio.get_bit(2)) + " | Bit 3 = " + str(xio.get_bit(3)))
+                sleep(0.5)
+            
+            print("Delete Object")
+            del xio
       
 
     except KeyboardInterrupt:
