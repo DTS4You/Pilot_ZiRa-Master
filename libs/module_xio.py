@@ -11,6 +11,10 @@ class XIO:
 
     def __init__(self, dir):
         self.dir = dir
+        self.io_0 = False
+        self.io_1 = False
+        self.io_2 = False
+        self.io_3 = False
         self.pin_n = []
         if dir:
             self.set_xio_out()
