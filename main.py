@@ -38,7 +38,7 @@ def main():
 
         gpio = MyGPIO.GPIO()
 
-        xio = MyXIO("OUTPUT")
+        xio = MyXIO.XIO("OUTPUT")
 
         sound = MySound.PWM_SOUND(0,1)
 
@@ -52,6 +52,7 @@ def main():
                 if value_io & TASTER_HINTEN:
                     if value_io & KONTAKT_GREEN:
                         print("Green")
+                        xio.write_io(0x01)
                         gpio.set_output_bit(OUT_WINRAD, "On")
                         set_led_to_color("green")
                         MyWS2812.set_led_obj(4, "def")
@@ -60,6 +61,7 @@ def main():
                         state_value = 1
                     elif value_io & KONTAKT_RED:
                         print("Red")
+                        xio.write_io(0x02)
                         gpio.set_output_bit(OUT_WINRAD, "Off")
                         set_led_to_color("red")
                         MyWS2812.set_led_obj(3, "def")
@@ -68,6 +70,7 @@ def main():
                         state_value = 2
                     else:
                         print("Default")
+                        xio.write_io(0x00)
                         gpio.set_output_bit(OUT_WINRAD, "Off")
                         set_led_to_color("def")
                         gpio.set_output_bit(OUT_TASTER_VORNE_GREEN, "Off")
