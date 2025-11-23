@@ -1,4 +1,8 @@
-from micropython import const
+###############################################################################
+### MCP23017_RAW
+### V1.00
+###############################################################################
+from micropython import const   # type: ignore
 
 MCP_GPIOA       = const(0x12)   # Spiegelt den Wert am Anschluss A wider.
 MCP_GPIOB       = const(0x13)   # Spiegelt den Wert am Anschluss B wider.
