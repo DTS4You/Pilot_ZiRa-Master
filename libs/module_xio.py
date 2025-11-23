@@ -77,7 +77,7 @@ def main():
     try:
         print("Start")
 
-        debug = "INPUT"
+        debug = "OUTPUT"
 
         if debug == "OUTPUT":
             print("Write Output")
@@ -115,6 +115,7 @@ def main():
             print(hex(xio.get_byte()))
 
             sleep(1)
+            xio.write_io(0x00)
             print("Delete Object")
             del xio
         
