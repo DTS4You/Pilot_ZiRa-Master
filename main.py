@@ -38,6 +38,8 @@ def main():
 
         gpio = MyGPIO.GPIO()
 
+        xio = MyXIO("OUTPUT")
+
         sound = MySound.PWM_SOUND(0,1)
 
         sound.play_off()
@@ -143,27 +145,12 @@ if __name__ == "__main__":
     else:
         print("Sound -> nicht vorhanden")
 
-    if MyModule.inc_decoder:
-        print("Decode -> Load-Module")
-        import libs.module_decode as MyDecode
-        #print("Decode -> Setup")
-        MyDecode.decode_setup()
-        ### Test ###
-        #print("Decode -> Test")
-        #MyDecode.decode_input("Test")
+    if MyModule.inc_xio:
+        print("XIO -> Load-Module")
+        import libs.module_xio as MyXIO
     else:
-        print("Decode -> nicht vorhanden")
+        print("XIO -> nicht vorhanden")
 
-    if MyModule.inc_serial:
-        print("Serial-COM -> Load-Module")
-        import libs.module_serial as MySerial
-        #print("Serial-Con -> Setup")
-        MySerial.sercon_setup()
-        ### Test ###
-        #print("Serial-Con -> Test")
-        #MySerial.sercon_write_out("Start Test")
-    else:
-        print("Serial-COM -> nicht vorhanden")
 
     main()      # Start Main $$$
 
