@@ -1,5 +1,5 @@
-# Pilot_ZiRa-Slave
-Pilot ZiRa 2. System
+# Pilot_ZiRa-Master
+Pilot ZiRa 1. System
 -------------------------------------------------------------------------------
 --- Hardware:
 -------------------------------------------------------------------------------
@@ -40,6 +40,20 @@ Schliesser  -> Grün - Grün
 Öffner      -> Blau - Blau
 LED rot     -> Rot - Schwarz
 LED grün    -> Rot - Schwarz
+#------------------------------------------------------------------------------
+LED-Zuordnung
+Grün
+01 -> Nutzwärme Austritt
+02 -> Nutzwärem Eintritt
+03 -> Kondensator
+04 -> Abwärme Austritt
+05 -> Drossel           -> Richtung anpassen
+06 -> Verdampfer
+07 -> Abwärme Eintritt  -> Richtung anpassen
+08 -> Kompressor 1 und Kompressor 2
+Rot
+02 -> Dampf
+03 -> Auspuff
 #------------------------------------------------------------------------------
 --- Beschreibung:
 State:
