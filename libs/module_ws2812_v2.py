@@ -46,6 +46,7 @@ class Ledsegment:
         self.color_show         = (0,0,0)
         self.color_value        = (0,0,0)
         self.color_red          = (0,0,0)
+        self.color_green        = (0,0,0)
 
     def set_color_on(self, color_on):
         self.color_on = color_on
