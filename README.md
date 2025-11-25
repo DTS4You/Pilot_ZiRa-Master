@@ -43,14 +43,17 @@ LED grün    -> Rot - Schwarz
 #------------------------------------------------------------------------------
 LED-Zuordnung
 Grün
-01 -> Nutzwärme Austritt
-02 -> Nutzwärem Eintritt
-03 -> Kondensator
-04 -> Abwärme Austritt
-05 -> Drossel           -> Richtung anpassen
-06 -> Verdampfer
-07 -> Abwärme Eintritt  -> Richtung anpassen
-08 -> Kompressor 1 und Kompressor 2
+01 ->  26 -> Nutzwärme Austritt
+02 ->  54 -> Nutzwärem Eintritt
+03 ->  48 -> Kondensator
+04 ->  42 -> Abwärme Austritt
+05 ->  48 -> Drossel           -> Richtung anpassen
+06 ->  64 -> Verdampfer
+07 ->  52 -> Abwärme Eintritt  -> Richtung anpassen
+08 -> 109 -> Kompressor 1 und Kompressor 2
+08 -> 41 - 56  -> Kompressor 1 
+08 -> 91 - 106 -> Kompressor 2
+
 Rot
 02 -> Dampf
 03 -> Auspuff
