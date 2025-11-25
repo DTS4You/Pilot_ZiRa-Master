@@ -27,8 +27,8 @@ J301 -> Q 0.0	-> Taster LED vorne			-> Grüne LED
 J302 -> Q 0.1	-> Taster LED vorne			-> Rote LED
 J303 -> Q 0.2	-> Taster LED hinten		-> Grüne LED
 J304 -> Q 0.3	-> Taster LED vorne			-> Rote LED
-J305 -> Q 0.4
-J306 -> Q 0.5
+J305 -> Q 0.4   -> LED-Kerzen 1,3,5
+J306 -> Q 0.5   -> LED-Kerzen 2,4,6
 J307 -> Q 0.6   -> Windräder                -> StepDown 0,8V
 J308 -> Q 0.7	-> Elektromagnet Ausgabe	-> High -> Stromlos Türe öffnet -> über Relaismodul Öffner
 #------------------------------------------------------------------------------

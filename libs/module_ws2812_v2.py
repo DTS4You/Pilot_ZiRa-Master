@@ -132,6 +132,8 @@ class Ledsegment:
     def show_stripe(self):
         self.neopixel.show()
 
+    def set_stop(self, stop):
+        self.stop = stop
 
 def setup_ws2812():
 
@@ -352,6 +354,9 @@ def set_led_obj(obj,state):
         led_obj[obj].show_red()
     if state == "green":
         led_obj[obj].show_green()
+    if state == "green_half":
+        led_obj[obj].set_stop(10)
+        led_obj[obj].show_green()
     do_refresh()
 
 # -----------------------------------------------------------------------------
@@ -366,17 +371,7 @@ def main():
     print("WS2812 -> Run self test")
     self_test()
     
-    #print("WS2812 -> Test -> LED")
-    #test_led(0,0)
-
-    print("WS2812 -> Object Test")
-    do_obj_on_off_def_off()
-
-    #print("WS2812 -> LED-Dot-Test")
-    #do_dot_test()
-
-    print("WS2812 -> Segment-Blink")
-    do_blink_test()
+    set_led_obj(2,"green_half")
         
     
 

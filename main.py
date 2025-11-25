@@ -16,10 +16,14 @@ OUT_TASTER_VORNE_GREEN  = 0
 OUT_TASTER_VORNE_RED    = 1
 OUT_WINRAD              = 6
 OUT_MAGNET              = 7
+OUT_LED_KERZE_1         = 4
+OUT_LED_KERZE_2         = 5
 
 def set_led_to_color(color):
-    for i in range(5):
-        MyWS2812.set_led_obj(i, color)
+    MyWS2812.set_led_obj(0, color)
+    MyWS2812.set_led_obj(1, color)
+    MyWS2812.set_led_obj(3, color)
+    MyWS2812.set_led_obj(4, color)
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
@@ -35,6 +39,7 @@ def main():
         print("Start Main Loop")
  
         set_led_to_color("def")
+        MyWS2812.set_led_obj(2, "def")
 
         gpio = MyGPIO.GPIO()
 
@@ -52,33 +57,45 @@ def main():
                 if value_io & TASTER_HINTEN:
                     if value_io & KONTAKT_GREEN:
                         print("Green")
-                        xio.write_io(0x01)
+                        xio.write_io(0x00)
                         gpio.set_output_bit(OUT_WINRAD, "On")
                         set_led_to_color("green")
                         MyWS2812.set_led_obj(4, "def")
+                        MyWS2812.set_led_obj(2, "def")
                         gpio.set_output_bit(OUT_TASTER_VORNE_GREEN, "On")
                         gpio.set_output_bit(OUT_TASTER_VORNE_RED, "Off")
+                        gpio.set_output_bit(OUT_LED_KERZE_1, "Off")
+                        gpio.set_output_bit(OUT_LED_KERZE_2, "Off")
                         state_value = 1
                     elif value_io & KONTAKT_RED:
                         print("Red")
-                        xio.write_io(0x02)
+                        xio.write_io(0x00)
                         gpio.set_output_bit(OUT_WINRAD, "Off")
                         set_led_to_color("red")
                         MyWS2812.set_led_obj(3, "def")
+                        MyWS2812.set_led_obj(2, "def")
                         gpio.set_output_bit(OUT_TASTER_VORNE_GREEN, "Off")
                         gpio.set_output_bit(OUT_TASTER_VORNE_RED, "On")
+                        gpio.set_output_bit(OUT_LED_KERZE_1, "Off")
+                        gpio.set_output_bit(OUT_LED_KERZE_2, "Off")
                         state_value = 2
                     else:
                         print("Default")
                         xio.write_io(0x00)
                         gpio.set_output_bit(OUT_WINRAD, "Off")
                         set_led_to_color("def")
+                        MyWS2812.set_led_obj(2, "def")
                         gpio.set_output_bit(OUT_TASTER_VORNE_GREEN, "Off")
                         gpio.set_output_bit(OUT_TASTER_VORNE_RED, "Off")
+                        gpio.set_output_bit(OUT_LED_KERZE_1, "Off")
+                        gpio.set_output_bit(OUT_LED_KERZE_2, "Off")
                         state_value = 0
 
             if state_value == 1:
                 if value_io & TASTER_VORNE:
+                    xio.write_io(0x01)
+                    MyWS2812.set_led_obj(2, "green_half")
+                    sleep(10)
                     sound.play_sound("green")
                     gpio.set_output_bit(OUT_MAGNET, "On")
                     gpio.set_output_bit(OUT_WINRAD, "Off")
@@ -90,6 +107,11 @@ def main():
 
             if state_value == 2:
                 if value_io & TASTER_VORNE:
+                    xio.write_io(0x02)
+                    MyWS2812.set_led_obj(2, "red")
+                    gpio.set_output_bit(OUT_LED_KERZE_1, "On")
+                    gpio.set_output_bit(OUT_LED_KERZE_2, "On")
+                    sleep(10)
                     sound.play_sound("red")
                     gpio.set_output_bit(OUT_WINRAD, "Off")
                     state_value = 3
@@ -99,11 +121,15 @@ def main():
             if state_value == 3:
                 #if value_io & TASTER_HINTEN:
                 if True:
+                    xio.write_io(0x00)
                     gpio.set_output_bit(OUT_WINRAD, "Off")
                     gpio.set_output_bit(OUT_MAGNET, "Off")
                     set_led_to_color("def")
+                    MyWS2812.set_led_obj(2, "def")
                     gpio.set_output_bit(OUT_TASTER_VORNE_GREEN, "Off")
                     gpio.set_output_bit(OUT_TASTER_VORNE_RED, "Off")
+                    gpio.set_output_bit(OUT_LED_KERZE_1, "Off")
+                    gpio.set_output_bit(OUT_LED_KERZE_2, "Off")
                     sleep(1)
                     state_value = 0
             
