@@ -41,7 +41,15 @@ Schliesser  -> Grün - Grün
 LED rot     -> Rot - Schwarz
 LED grün    -> Rot - Schwarz
 #------------------------------------------------------------------------------
-LED-Zuordnung
+LED-Zuordnung Master
+01 -> 161 -> Gitter-Rahmen Horizontal 2 x parallel
+02 ->  84 -> Gitter-Rahmen Vertikal   6 x parallel
+03 ->  32 -> CO2-Anzeige
+04 ->  28 -> Energie Windrad    -> Richtung dr
+ehen
+05 ->  30 -> Energie Kohle      -> Richtung drehen
+
+LED-Zuordnung Slave
 Grün
 01 ->  26 -> Nutzwärme Austritt
 02 ->  54 -> Nutzwärem Eintritt
